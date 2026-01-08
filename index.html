@@ -1,0 +1,73 @@
+<script>
+function exportPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    let y = 20;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.text(document.getElementById('resumeName').textContent, 20, y);
+
+    y += 10;
+    doc.setFontSize(11);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Contato: ${document.getElementById('resumeContact').textContent}`, 20, y);
+
+    y += 15;
+    doc.setFont("helvetica", "bold");
+    doc.text("Resumo Profissional", 20, y);
+
+    y += 8;
+    doc.setFont("helvetica", "normal");
+    const summary = doc.splitTextToSize(
+        document.getElementById('resumeSummary').textContent,
+        170
+    );
+    doc.text(summary, 20, y);
+
+    y += summary.length * 6 + 5;
+    doc.setFont("helvetica", "bold");
+    doc.text("Experiência", 20, y);
+
+    y += 8;
+    doc.setFont("helvetica", "normal");
+    const experience = doc.splitTextToSize(
+        document.getElementById('resumeExperience').textContent,
+        170
+    );
+    doc.text(experience, 20, y);
+
+    y += experience.length * 6 + 5;
+    doc.setFont("helvetica", "bold");
+    doc.text("Educação", 20, y);
+
+    y += 8;
+    doc.setFont("helvetica", "normal");
+    doc.text(
+        doc.splitTextToSize(
+            document.getElementById('resumeEducation').textContent,
+            170
+        ),
+        20,
+        y
+    );
+
+    y += 15;
+    doc.setFont("helvetica", "bold");
+    doc.text("Habilidades", 20, y);
+
+    y += 8;
+    doc.setFont("helvetica", "normal");
+    const skills = document.getElementById('resumeSkills')
+        .textContent
+        .split(',');
+
+    skills.forEach(skill => {
+        doc.text(`• ${skill.trim()}`, 25, y);
+        y += 6;
+    });
+
+    doc.save("curriculo_profissional.pdf");
+}
+</script>
