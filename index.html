@@ -1,74 +1,199 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Site funcionando</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Currículo Profissional</title>
+    <style>
+        /* Estilos gerais para layout limpo e profissional */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff; /* Fundo branco */
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #003366; /* Azul marinho para títulos */
+            margin-bottom: 20px;
+        }
+        form {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: bold;
+            color: #003366;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        button {
+            background-color: #003366;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #005599;
+        }
+        #resume {
+            display: none; /* Inicialmente oculto */
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        #resume h2 {
+            color: #003366;
+            border-bottom: 2px solid #003366;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            color: #003366;
+            margin-bottom: 5px;
+        }
+        .section p {
+            margin: 0;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Gerador de Currículo Profissional</h1>
+        <p>Preencha os campos abaixo e clique em "Gerar Currículo" para visualizar. Em seguida, exporte em PDF.</p>
+        
+        <!-- Formulário para entrada de dados -->
+        <form id="resumeForm">
+            <label for="name">Nome Completo:</label>
+            <input type="text" id="name" required>
+            
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" required>
+            
+            <label for="phone">Telefone:</label>
+            <input type="tel" id="phone" required>
+            
+            <label for="summary">Resumo Profissional:</label>
+            <textarea id="summary" required></textarea>
+            
+            <label for="experience">Experiência:</label>
+            <textarea id="experience" required></textarea>
+            
+            <label for="education">Formação:</label>
+            <textarea id="education" required></textarea>
+            
+            <label for="skills">Habilidades:</label>
+            <textarea id="skills" required></textarea>
+            
+            <button type="submit">Gerar Currículo</button>
+        </form>
+        
+        <!-- Área para exibir o currículo gerado -->
+        <div id="resume">
+            <h2 id="resumeName"></h2>
+            <div class="section">
+                <h3>Contato</h3>
+                <p id="resumeContact"></p>
+            </div>
+            <div class="section">
+                <h3>Resumo Profissional</h3>
+                <p id="resumeSummary"></p>
+            </div>
+            <div class="section">
+                <h3>Experiência</h3>
+                <p id="resumeExperience"></p>
+            </div>
+            <div class="section">
+                <h3>Formação</h3>
+                <p id="resumeEducation"></p>
+            </div>
+            <div class="section">
+                <h3>Habilidades</h3>
+                <p id="resumeSkills"></p>
+            </div>
+            <button onclick="exportPDF()">Exportar em PDF</button>
+        </div>
+    </div>
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Gerador de Currículo</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      display: flex;
-      justify-content: center;
-      padding: 40px;
-    }
-    .container {
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 10px;
-      width: 100%;
-      max-width: 500px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    input, textarea, button {
-      width: 100%;
-      margin-bottom: 12px;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-    button {
-      background: #6c63ff;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #554eea;
-    }
-  </style>
-</head>
-<body>
+    <!-- Inclusão da biblioteca jsPDF via CDN para exportação de PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Função para gerar e exibir o currículo na página
+        document.getElementById('resumeForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Previne o envio padrão do formulário
+            
+            // Coleta os valores dos campos do formulário
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const summary = document.getElementById('summary').value;
+            const experience = document.getElementById('experience').value;
+            const education = document.getElementById('education').value;
+            const skills = document.getElementById('skills').value;
+            
+            // Preenche o currículo com os dados coletados
+            document.getElementById('resumeName').textContent = name;
+            document.getElementById('resumeContact').textContent = `${email} | ${phone}`;
+            document.getElementById('resumeSummary').textContent = summary;
+            document.getElementById('resumeExperience').textContent = experience;
+            document.getElementById('resumeEducation').textContent = education;
+            document.getElementById('resumeSkills').textContent = skills;
+            
+            // Exibe a seção do currículo
+            document.getElementById('resume').style.display = 'block';
+        });
 
-  <div class="container">
-    <h1>Gerador de Currículo</h1>
-
-    <input type="text" placeholder="Nome completo">
-    <input type="email" placeholder="E-mail">
-    <input type="text" placeholder="Telefone">
-    <textarea rows="4" placeholder="Resumo profissional"></textarea>
-    <textarea rows="4" placeholder="Experiências"></textarea>
-    <textarea rows="4" placeholder="Formação"></textarea>
-
- <button onclick="gerarCurriculo()">Gerar currículo</button>
-  </div>
-<script>
-  function gerarCurriculo() {
-    alert("Currículo gerado com sucesso! (próximo passo: exibir ou exportar)");
-  }
-</script>
-
+        // Função para exportar o currículo como PDF usando jsPDF
+        function exportPDF() {
+            const { jsPDF } = window.jspdf; // Acessa a biblioteca jsPDF
+            const doc = new jsPDF();
+            
+            // Define o tamanho da fonte e adiciona o conteúdo ao PDF
+            doc.setFontSize(20);
+            doc.text(document.getElementById('resumeName').textContent, 20, 30);
+            doc.setFontSize(12);
+            doc.text(`Contato: ${document.getElementById('resumeContact').textContent}`, 20, 50);
+            doc.text('Resumo Profissional:', 20, 70);
+            doc.text(document.getElementById('resumeSummary').textContent, 20, 80, { maxWidth: 170 });
+            doc.text('Experiência:', 20, 110);
+            doc.text(document.getElementById('resumeExperience').textContent, 20, 120, { maxWidth: 170 });
+            doc.text('Formação:', 20, 160);
+            doc.text(document.getElementById('resumeEducation').textContent, 20, 170, { maxWidth: 170 });
+            doc.text('Habilidades:', 20, 210);
+            doc.text(document.getElementById('resumeSkills').textContent, 20, 220, { maxWidth: 170 });
+            
+            // Salva o PDF com o nome 'curriculo.pdf'
+            doc.save('curriculo.pdf');
+        }
+    </script>
 </body>
 </html>
