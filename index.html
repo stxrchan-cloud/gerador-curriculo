@@ -195,5 +195,30 @@
             doc.save('curriculo.pdf');
         }
     </script>
+    <script>
+function exportPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.setFontSize(18);
+  doc.text("Currículo", 20, 20);
+
+  doc.setFontSize(12);
+  doc.text("Nome: " + document.getElementById("resumeName").textContent, 20, 40);
+  doc.text("Contato: " + document.getElementById("resumeContact").textContent, 20, 50);
+
+  doc.text("Resumo:", 20, 70);
+  doc.text(document.getElementById("resumeSummary").textContent, 20, 80, { maxWidth: 170 });
+
+  doc.text("Experiência:", 20, 120);
+  doc.text(document.getElementById("resumeExperience").textContent, 20, 130, { maxWidth: 170 });
+
+  doc.text("Formação:", 20, 170);
+  doc.text(document.getElementById("resumeEducation").textContent, 20, 180, { maxWidth: 170 });
+
+  doc.save("curriculo-star.pdf");
+}
+</script>
+
 </body>
 </html>
