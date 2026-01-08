@@ -6,8 +6,64 @@
 </head>
 <body>
 
-  <h1>FUNCIONOU 🎉</h1>
-  <p>Se você está vendo isso, o GitHub Pages está lendo seu site.</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador de Currículo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input, textarea, button {
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    button {
+      background: #6c63ff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #554eea;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Gerador de Currículo</h1>
+
+    <input type="text" placeholder="Nome completo">
+    <input type="email" placeholder="E-mail">
+    <input type="text" placeholder="Telefone">
+    <textarea rows="4" placeholder="Resumo profissional"></textarea>
+    <textarea rows="4" placeholder="Experiências"></textarea>
+    <textarea rows="4" placeholder="Formação"></textarea>
+
+    <button>Gerar currículo</button>
+  </div>
 
 </body>
 </html>
