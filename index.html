@@ -149,6 +149,12 @@ button:hover {
 #photoInput {
   display: none;
 }
+        .header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 </style>
 
 </head>
@@ -172,13 +178,9 @@ photoInput.addEventListener("change", function () {
 </script>
 
 <body>
-    <div class="container">
-        <div class="photo-container">
-  <label for="photoInput" class="photo-label">
-    <img id="profilePhoto" src="" alt="Foto de perfil">
-    <span>Adicionar foto</span>
-  </label>
-  <input type="file" id="photoInput" accept="image/*">
+    <div class="header">
+  <div class="photo-container">...</div>
+  <h1>Gerador de Currículo Profissional</h1>
 </div>
         <h1>Gerador de Currículo Profissional</h1>
         <p>Preencha os campos abaixo e clique em "Gerar Currículo" para visualizar. Em seguida, exporte em PDF.</p>
@@ -187,7 +189,8 @@ photoInput.addEventListener("change", function () {
         <form id="resumeForm">
             <label for="name">Nome Completo:</label>
             <input type="text" id="name" required>
-            <p class="location">Aracaju – SE</p>
+          <label for="city">Cidade / Estado:</label>
+<input type="text" id="city" placeholder="Ex: São Paulo – SP">
             <label for="email">E-mail:</label>
             <input type="email" id="email" required>
             
