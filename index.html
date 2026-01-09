@@ -110,12 +110,13 @@ button:hover {
 }
 
         }
-    </style>
-    /* ===== FOTO DE PERFIL ===== */
+  <style>
+/* ===== FOTO DE PERFIL ===== */
 .photo-container {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+}
 
 .photo-label {
   width: 150px;
@@ -148,8 +149,28 @@ button:hover {
 #photoInput {
   display: none;
 }
+</style>
 
 </head>
+    <script>
+const photoInput = document.getElementById("photoInput");
+const profilePhoto = document.getElementById("profilePhoto");
+const labelText = document.querySelector(".photo-label span");
+
+photoInput.addEventListener("change", function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      profilePhoto.src = e.target.result;
+      profilePhoto.style.display = "block";
+      labelText.style.display = "none";
+    };
+    reader.readAsDataURL(file);
+  }
+});
+</script>
+
 <body>
     <div class="container">
         <div class="photo-container">
