@@ -5,84 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de Currículo Profissional</title>
     <style>
-        /* Estilos gerais para layout limpo e profissional */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff; /* Fundo branco */
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #003366; /* Azul marinho para títulos */
-            margin-bottom: 20px;
-        }
-        form {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        label {
-            font-weight: bold;
-            color: #003366;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-        button {
-            background-color: #003366;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #005599;
-        }
-        #resume {
-            display: none; /* Inicialmente oculto */
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-        #resume h2 {
-            color: #003366;
-            border-bottom: 2px solid #003366;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .section h3 {
-            color: #003366;
-            margin-bottom: 5px;
-        }
-        .section p {
-            margin: 0;
-            line-height: 1.5;
+      
+        /* ===== ESTILO GERAL ===== */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+/* ===== CONTAINER PRINCIPAL ===== */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== TÍTULOS ===== */
+h1 {
+  text-align: center;
+  color: #1f3a5f;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #1f3a5f;
+  margin-bottom: 15px;
+}
+
+h3 {
+  color: #1f3a5f;
+  border-left: 4px solid #1f3a5f;
+  padding-left: 10px;
+  margin-bottom: 8px;
+}
+
+/* ===== TEXTO ===== */
+p {
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===== FORMULÁRIO ===== */
+form {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+label {
+  font-weight: 600;
+  color: #1f3a5f;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccd3da;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #1f3a5f;
+}
+
+/* ===== BOTÕES ===== */
+button {
+  background-color: #1f3a5f;
+  color: #ffffff;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #162b45;
+}
+
+/* ===== CURRÍCULO GERADO ===== */
+#resume {
+  display: none;
+  margin-top: 40px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e0e4e8;
+}
+
+.section {
+  margin-bottom: 28px;
+}
+
         }
     </style>
 </head>
