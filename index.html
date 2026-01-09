@@ -111,9 +111,54 @@ button:hover {
 
         }
     </style>
+    /* ===== FOTO DE PERFIL ===== */
+.photo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+
+.photo-label {
+  width: 150px;
+  height: 150px;
+  border-radius: 16px; /* quadrado elegante */
+  border: 2px dashed #1f3a5f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background-color: #f4f6f8;
+}
+
+.photo-label span {
+  position: absolute;
+  font-size: 14px;
+  color: #1f3a5f;
+  text-align: center;
+}
+
+.photo-label img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+#photoInput {
+  display: none;
+}
+
 </head>
 <body>
     <div class="container">
+        <div class="photo-container">
+  <label for="photoInput" class="photo-label">
+    <img id="profilePhoto" src="" alt="Foto de perfil">
+    <span>Adicionar foto</span>
+  </label>
+  <input type="file" id="photoInput" accept="image/*">
+</div>
         <h1>Gerador de Currículo Profissional</h1>
         <p>Preencha os campos abaixo e clique em "Gerar Currículo" para visualizar. Em seguida, exporte em PDF.</p>
         
@@ -121,7 +166,7 @@ button:hover {
         <form id="resumeForm">
             <label for="name">Nome Completo:</label>
             <input type="text" id="name" required>
-            
+            <p class="location">Aracaju – SE</p>
             <label for="email">E-mail:</label>
             <input type="email" id="email" required>
             
